@@ -1,0 +1,24 @@
+{"statements" :
+[
+"Who does lead team neo?",
+"Team neo is lead by Peter Petrelli",
+"Who does lead team Trinity?",
+"Team Trinity is lead by Peter Parker",
+"Who does lead team Morpheus?",
+"Team Morpheus is lead by Peter Quill",
+"What does team Neo use?",
+"Team Neo uses java play",
+"What does team Trinity use?",
+"Team Trinity uses Nodejs",
+"What does team Morpheus use?",
+"Team Morpheus uses Spring Boot",
+"What does work Peter Petrelli on?",
+"Peter Petrelli works on java play",
+"What does work Peter Parker on?",
+"Peter Parker works on Nodejs",
+"What does Peter Quill work on?",
+"Peter Quill works on Spring Boot",
+"Which teams do we have?",
+"We have Team Neo, Team Trinity and Team Morpheus."
+]
+}
