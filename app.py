@@ -14,12 +14,10 @@ english_bot.train([
     "Hi there!",
     "Hello",
 ])
-
 english_bot.train([
     "Greetings!",
     "Hello",
 ])
-
 english_bot.train([
     "How are you?",
     "I am good.",
@@ -27,7 +25,6 @@ english_bot.train([
     "Thank you",
     "You are welcome.",
 ])
-
 """
 english_bot.set_trainer(ChatterBotCorpusTrainer)
 english_bot.train("chatterbot.corpus.english.greetings",
