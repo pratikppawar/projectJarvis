@@ -38,6 +38,8 @@ bot = ChatBot("Adam",
 with open('statements.json') as json_data:
     d = json.load(json_data)
     #print(d.get("statements"))
+for item in data:
+    bot.train(item)
 
 bot.train([
     "How are you?",
@@ -47,7 +49,6 @@ bot.train([
     "You are welcome. How can I help you?",
 ])
 
-bot.train(d.get("statements"))
 
 bot.train(
     "chatterbot.corpus.english.greetings"
