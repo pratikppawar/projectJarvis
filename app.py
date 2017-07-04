@@ -44,7 +44,6 @@ bot.train([
     "You are welcome. How can I help you?",
 ])
 
-
 bot.train(
     "chatterbot.corpus.english.greetings"
 )
