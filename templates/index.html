@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='adam.css')}}">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -14,13 +13,38 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-var send = function(){
-	alert(document.getElementById("btn-input").value);
-	$.get("http://127.0.0.1:5000/get/how%20are%20you?", function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
-    });
-	
+
+var displayIpMessage = function(msg){
+	var el = '<li class="left clearfix">    <span class="chat-img pull-left"> <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="UserAvatar" class="img-circle" />    </span>    <div class="chat-body clearfix">         <div class="header">             <strong class="primary-font">Adam</strong> <small class="pull-right text-muted">                <span class="glyphicon glyphicon-time"><span>12mins ago</small>        </div>        <p class="content">            '+msg+'        </p>    </div></li>'
+	$(el).appendTo(".chat");
+$('.panel-body').animate({ scrollTop: 		$('.panel-body').prop('scrollHeight')}, 1000);
 }
+
+var displayOpMessage = function(msg){
+	var el = '<li class="right clearfix">    <span class="chat-img pull-right">        <img src="http://placehold.it/50/FA6F57/fff&text=ME"alt="User Avatar" class="img-circle" />    </span>    <div class="chat-body clearfix">        <div class="header">           <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>            <strong class="pull-right primary font">You</strong>        </div>        <p class="content pull-right">            '+msg+'        </p>    </div></li>'
+	$(el).appendTo(".chat");
+	$('.panel-body').animate({ scrollTop: 		$('.panel-body').prop('scrollHeight')}, 1000);
+}
+
+var send = function(){
+	var msg = document.getElementById("btn-input").value;
+	displayIpMessage(msg);
+        document.getElementById("btn-input").value = "";
+	$.get("http://127.0.0.1:5000/get/" + msg, function(data, status){
+        displayOpMessage(data);
+    });
+}
+var sendFormat = function(){
+	var msg = encodeURI(document.getElementById("format-input").value);
+    
+	$.get("http://127.0.0.1:5000/getFormat/" + msg, function(data, status){
+    });
+}
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        send();
+    }
+});
 </script>
 <style>
 .container
@@ -35,25 +59,20 @@ var send = function(){
     margin: 0;
     padding: 0;
 }
-
 .chat li
 {
     margin-bottom: 10px;
     padding-bottom: 5px;
     border-bottom: 1px dotted #B3A9A9;
 }
-
 .chat li.left .chat-body
 {
     margin-left: 60px;
 }
-
 .chat li.right .chat-body
 {
     margin-right: 60px;
 }
-
-
 .chat li .chat-body p
 {
     margin: 0;
@@ -98,6 +117,18 @@ var send = function(){
 </div>
 
 <div class="container">
+	<div class="row" style="height:50px">
+        <div class="col-md-3">
+           
+                    <div class="input-group">
+                        <input id="format-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+								<button class="btn btn-success btn-sm" id="btn-format" onclick="sendFormat()">
+                                SendFormat</button>
+                        </span>
+                    </div>
+        </div>
+     </div>
     <div class="row">
         <div class="col-md-5">
             <div class="panel panel-primary">
@@ -112,62 +143,6 @@ var send = function(){
             <div class="panel-collapse" id="collapseOne">
                 <div class="panel-body">
                     <ul class="chat">
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="right clearfix"><span class="chat-img pull-right">
-                            <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
-                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="left clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
-                        <li class="right clearfix"><span class="chat-img pull-right">
-                            <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
-                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                                    dolor, quis ullamcorper ligula sodales.
-                                </p>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 <div class="panel-footer">
