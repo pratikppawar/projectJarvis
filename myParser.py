@@ -10,7 +10,7 @@ table = parsed_html.body.find('table', attrs={'class':'details'})
 heading_data = []
 heading = table.findAll("th")
 for item in heading:
-	heading_data.append(item.text)
+	heading_data.append(item.text.lower())
 #heading_data consists of the table headings
 #print(heading_data)
 
@@ -27,7 +27,7 @@ for row in table.findAll("tr")[1:]:
 json_data=[]
 for rows in data:
 	que = "can you tell me about "+rows[0]+"?"
-	ans = rows[0]+" is lead by "+rows[1]+" and uses "+rows[2];
+	ans = rows[0]+" is lead by "+rows[2]+" and uses "+rows[1];
 	json_item=[que,ans]
 	json_data.append(json_item)
 	#team and lead rel
@@ -60,7 +60,14 @@ with open('data.json', 'w') as f:
 
  #parseQnA is the function called using REST on sendFormat button click with msg as data
 def parseQnA(msg):
-	return msg;
+	send_format_json_data = []
+	for data_item in data:
+		new_str = msg.lower()
+		for head_item in heading_data:
+			#print(data_item[heading_data.index(head_item)])
+			new_str = str.replace(new_str,'<'+head_item+'>',data_item[heading_data.index(head_item)])
+		send_format_json_data.append(new_str)
+		#print(new_str)
+	return(send_format_json_data)
+	#you can add this json in this file or back in app.py
 	
-msg = '<Team Name> is lead by <Team lead>'
-

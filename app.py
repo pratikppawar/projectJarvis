@@ -59,8 +59,7 @@ def get_raw_response(query):
 
 @app.route("/getFormat/<string:query>")
 def get_format(query):
-	msg=query.split(",")
-	ret = myParser.parseQnA(msg)
+	ret = myParser.parseQnA(query)
 	return str(ret)
 	
 if __name__ == "__main__":
