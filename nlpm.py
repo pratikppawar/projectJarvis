@@ -73,3 +73,20 @@ print("all nsubj")
 for i in nsubj:
     print(i)
 print("----------------------------------------")
+
+for s in sentences:
+    govList={}
+    enhancedDependencies=s.get("enhancedDependencies")
+    for item in enhancedDependencies:
+        if(item.get("governorGloss") == "ROOT"):
+            rootWord=item.get("dependentGloss")
+            
+        index=item.get("governor")
+        if(govList.has_key(item.get("governorGloss"))):
+            govList[item.get("governorGloss")]+=1
+        else:
+            govList[item.get("governorGloss")]=1
+    print("for sentense - ")
+    print(" ".join([t["dependentGloss"] for t in enhancedDependencies]))
+    print("rootWord - "+rootWord)
+    print(govList)
